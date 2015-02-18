@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+        <title>VA Facility Locator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link href="third-party/jQueryMobile/jquery.mobile-1.3.1.min.css" rel="stylesheet" />
+        <link href="third-party/jQueryMobile/info-app-theme-roller.css" rel="stylesheet" />
+        <link href="css/info-app.css" rel="stylesheet" />
+        <script src="third-party/jQuery/jquery-2.0.0.min.js"></script>
+        <script src="third-party/jQueryUI/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="third-party/jQueryMobile/jquery.mobile-1.3.1.min.js"></script>
+        <script src="third-party/handlebars/handlebars.js"></script>
+        <script src="cordova.js"></script>
+        <script src="http://maps.google.com/maps/api/js?v=3.exp&sensor=true&libraries=geometry"></script>
+        <script src="third-party/oms/oms.min.js"></script>
+        <script src="third-party/emailComposer/emailComposer.js"></script>
+        <script src="third-party/mobileAccessibility/mobile-accessibility.js"></script>
+        <script src="third-party/google/markerclusterer_packed.js"></script>
+    </head>
+    <body>
+        <style>
+            #legendButton {
+                position:absolute;
+                z-index:3;
+                bottom:15px;
+                right:5px;
+                background-color:white;
+                border:solid 1px gray;
+                padding:2px 5px 2px 5px;
+                font-size:.6em;
+                text-decoration:none
+            }
+            .ui-listview-filter-inset {
+                margin-top: 0;
+            }
+        </style>
+        
+        <section data-role="page" id="mappage">
+            <div name='iosheader' data-role='header' data-position='fixed' style='height:20px;background-color:transparent;'></div>
+            <div name="normalheader" data-role="header" data-theme="f">
+                <a href="#" id="backBtn" data-role="button" data-rel="back" class="ui-btn-left" data-theme="a">Back</a>
+                <h2 class="ia-heading">VA Facility Locator</h2>
+                <a href="index.html" id="backBtn" data-ajax='false' class="ui-btn-right" data-theme="a">Home</a>
+            </div>
+            <div data-role="content" style='margin:0;padding:0;position:relative'>
+                <div id="map-canvas"></div>
+                <a id="legendButton" href="#legend" data-rel="popup" data-position-to="window" data-transition="pop" style="color:#333333;display:none;">Legend</a>
+            </div>
+            <div data-role="footer" data-theme="e">
+                <div data-role="navbar">
+                    <ul>
+                        <li class="ia-navbar-separator"><a data-ajax="false" href="index.html#ia-wv">Info &amp;<br />Services</a></li>
+                        <li class="ia-navbar-separator"><a href="#facility-search">Find a<br />Facility</a></li>
+                        <li><a data-ajax="false" href="index.html#ia-wv-crisis">Crisis &amp;<br />Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="legend" data-role="popup" style="padding:10px">
+                <a href="#" data-theme="e" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <div style='text-align:center;font-size:1.1em;font-weight:bold;margin-bottom:5px'>Map Legend</div>
+                <table style="font-size:.9em">
+                    <tr>
+                        <td><img src="images/red-dot.png" style="vertical-align:middle" alt="VHA marker"/></td>
+                        <td>Veterans Health Adminstration</td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/green-dot.png" style="vertical-align:middle" alt="VBA marker"  /></td>
+                        <td>Veterans Benefits Administration</td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/purple-dot.png" style="vertical-align:middle" alt="NCA marker"  /></td>
+                        <td>National Cemetery Administration</td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/m1.png" style="vertical-align:middle;height:30px;width:30px;" alt="1 to 10 Facilities in the area"  /></td>
+                        <td>1-10 facilities in the area</td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/m2.png" style="vertical-align:middle;height:30px;width:30px;" alt="11 to 99 Facilities in the area"  /></td>
+                        <td>11-99 facilities in the area</td>
+                    </tr>
+                    <tr>
+                        <td><img src="images/m3.png" style="vertical-align:middle;height:30px;width:30px;" alt="100 or more facilities in the area"  /></td>
+                        <td>100+ facilities in the area</td>
+                    </tr>
+                </table>
+            </div>
+            <div id="talk" data-role="popup" style="padding:10px;max-width:600px;">
+                <a href="#" data-theme="e" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <h4 style="text-align:center" id="message"></h4>
+            </div>
+        </section>
+        <section data-role="page" id="facility-search">
+            <div name='iosheader' data-role='header' data-position='fixed' style='height:20px;background-color:transparent;'></div>
+            <div name="normalheader" data-role="header" data-theme="f">
+                <a href="#" id="backBtn" data-rel="back" class="ui-btn-left"  data-theme="a">Back</a>
+                <h2 class="ia-heading">VA Facility Locator</h2>
+                <a href="index.html" id="backBtn" data-ajax='false' class="ui-btn-right"  data-theme="a">Home</a>
+            </div>
+            <div data-role="content">
+                <div id="searchTabBar" data-role="navbar" >
+                    <ul>
+                        <li><a name="tab0" href="#" onclick="setTab(0)" >By Type/Zip</a></li>
+                        <li><a name="tab1" href="#" onclick="setTab(1)" >By Name</a></li>
+                        <li><a name="tab2" href="#" onclick="setTab(2)" >By State</a></li>
+                    </ul>
+                </div>
+                <div name="searchTab0" style="display:block">
+                    <div style="padding-top:20px">
+                        <div>
+                            <label for="zip-code" class="ui-hidden-accessible">Zip Code</label>
+                            <input id="zip-code" type="number" placeholder="Enter a Zip Code" />
+                        </div>
+                        <label for="facility-country" class="ui-hidden-accessible">Country:</label>
+                        <select id="facility-country" name="facility-country" data-native-menu="false">
+                            <option value="US">United States</option>
+                            <option value="PH">Philippines</option>
+                            <option value="GU">Guam</option>
+                            <option value="AS">American Samoa</option>
+                            <option value="VI">Virgin Islands</option>
+                            <option value="PR">Puerto Rico</option>
+                        </select>
+                        <div>
+                            <label for="facility-nearest" class="ui-hidden-accessible">Search Radius:</label>
+                            <select id="facility-nearest" name="facility-nearest" data-native-menu="false">
+                                <option value="0">Search Distance</option>
+                                <option value="5">Within 5 Miles</option>
+                                <option value="10">Within 10 Miles</option>
+                                <option value="25">Within 25 Miles</option>
+                                <option value="50">Within 50 Miles</option>
+                                <option value="100">Within 100 Miles</option>
+                            </select>
+                        </div>
+                        <label for="facility-type" class="ui-hidden-accessible">Facility Type:</label>
+                        <select id="facility-type" name="facility-type" data-native-menu="false">
+                            <option value="0">All Facility Types</option>
+                        </select>
+                        <div style="padding-top:20px">
+                            <input type="submit" value="Search" data-theme="f" data-inline="false" onClick="javascript:validateSearchForm()"/>
+                        </div>
+                    </div>
+                </div>
+                <div name="searchTab1" style="display:none;padding-top:20px">
+                    <label for="facility-name" class="ui-hidden-accessible">Search by Name</label>
+                    <ul id="facility-name" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Type the VA Facility name..."></ul>
+                </div>
+                <div name="searchTab2" style="display:none;padding-top:20px">
+                    <label for="facility-state" class="ui-hidden-accessible">Select a State</label>
+                    <div id="facility-state" data-role="collapsible">
+                        <h2>Choose a state...</h2>
+                        <ul data-role="listview" data-filter="true">
+                            <li><a href='javascript:searchByState("AL");'>Alabama</a></li>
+                            <li><a href='javascript:searchByState("AK");'>Alaska</a></li>
+                            <li><a href='javascript:searchByState("AS");'>American Samoa &dagger;</a></li>
+                            <li><a href='javascript:searchByState("AZ");'>Arizona</a></li>
+                            <li><a href='javascript:searchByState("AR");'>Arkansas</a></li>
+                            <li><a href='javascript:searchByState("CA");'>California</a></li>
+                            <li><a href='javascript:searchByState("CO");'>Colorado</a></li>
+                            <li><a href='javascript:searchByState("CT");'>Connecticut</a></li>
+                            <li><a href='javascript:searchByState("DE");'>Delaware</a></li>
+                            <li><a href='javascript:searchByState("DC");'>District of Columbia &dagger;</a></li>
+                            <li><a href='javascript:searchByState("FL");'>Florida</a></li>
+                            <li><a href='javascript:searchByState("GA");'>Georgia</a></li>
+                            <li><a href='javascript:searchByState("GU");'>Guam &dagger;</a></li>
+                            <li><a href='javascript:searchByState("HI");'>Hawaii</a></li>
+                            <li><a href='javascript:searchByState("ID");'>Idaho</a></li>
+                            <li><a href='javascript:searchByState("IL");'>Illinois</a></li>
+                            <li><a href='javascript:searchByState("IN");'>Indiana</a></li>
+                            <li><a href='javascript:searchByState("IA");'>Iowa</a></li>
+                            <li><a href='javascript:searchByState("KS");'>Kansas</a></li>
+                            <li><a href='javascript:searchByState("KY");'>Kentucky</a></li>
+                            <li><a href='javascript:searchByState("LA");'>Louisiana</a></li>
+                            <li><a href='javascript:searchByState("ME");'>Maine</a></li>
+                            <li><a href='javascript:searchByState("MD");'>Maryland</a></li>
+                            <li><a href='javascript:searchByState("MA");'>Massachusetts</a></li>
+                            <li><a href='javascript:searchByState("MI");'>Michigan</a></li>
+                            <li><a href='javascript:searchByState("MN");'>Minnesota</a></li>
+                            <li><a href='javascript:searchByState("MS");'>Mississippi</a></li>
+                            <li><a href='javascript:searchByState("MO");'>Missouri</a></li>
+                            <li><a href='javascript:searchByState("MT");'>Montana</a></li>
+                            <li><a href='javascript:searchByState("NE");'>Nebraska</a></li>
+                            <li><a href='javascript:searchByState("NV");'>Nevada</a></li>
+                            <li><a href='javascript:searchByState("NH");'>New Hampshire</a></li>
+                            <li><a href='javascript:searchByState("NJ");'>New Jersey</a></li>
+                            <li><a href='javascript:searchByState("NM");'>New Mexico</a></li>
+                            <li><a href='javascript:searchByState("NY");'>New York</a></li>
+                            <li><a href='javascript:searchByState("NC");'>North Carolina</a></li>
+                            <li><a href='javascript:searchByState("ND");'>North Dakota</a></li>
+                            <li><a href='javascript:searchByState("OH");'>Ohio</a></li>
+                            <li><a href='javascript:searchByState("OK");'>Oklahoma</a></li>
+                            <li><a href='javascript:searchByState("OR");'>Oregon</a></li>
+                            <li><a href='javascript:searchByState("PA");'>Pennsylvania</a></li>
+                            <li><a href='javascript:searchByState("PI");'>Philippines &dagger;</a></li>
+                            <li><a href='javascript:searchByState("PR");'>Puerto Rico &dagger;</a></li>
+                            <li><a href='javascript:searchByState("RI");'>Rhode Island</a></li>
+                            <li><a href='javascript:searchByState("SC");'>South Carolina</a></li>
+                            <li><a href='javascript:searchByState("SD");'>South Dakota</a></li>
+                            <li><a href='javascript:searchByState("TN");'>Tennessee</a></li>
+                            <li><a href='javascript:searchByState("TX");'>Texas</a></li>
+                            <li><a href='javascript:searchByState("UT");'>Utah</a></li>
+                            <li><a href='javascript:searchByState("VT");'>Vermont</a></li>
+                            <li><a href='javascript:searchByState("VA");'>Virginia</a></li>
+                            <li><a href='javascript:searchByState("VI");'>Virgin Islands &dagger;</a></li>
+                            <li><a href='javascript:searchByState("WA");'>Washington</a></li>
+                            <li><a href='javascript:searchByState("WV");'>West Virginia</a></li>
+                            <li><a href='javascript:searchByState("WI");'>Wisconsin</a></li>
+                            <li><a href='javascript:searchByState("WY");'>Wyoming</a></li>
+                        </ul>
+
+                    </div>
+                    <div style="padding:5px;font-size:.65em;color:#999999">&dagger; = country/commonwealth/territory/district</div>
+                </div>
+            </div>
+            <div data-role="footer" data-theme="e">
+                <div data-role="navbar">
+                    <ul >
+                        <li class="ia-navbar-separator"><a data-ajax='false' href="index.html#ia-wv">Info &amp;<br />Services</a></li>
+                        <li class="ia-navbar-separator"><a id="viewMapLink" href="#mappage">View<br />Map</a></li>
+                        <li><a data-ajax='false' href="index.html#ia-wv-crisis">Crisis &amp;<br />Support</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="popupmessage" data-role="popup" data-overlay-theme="f" style="padding:10px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+                <h3 style="text-align:center"></h3>
+            </div>
+        </section>
+        <section data-role="page" id="facility-details">
+            <div name='iosheader' data-role='header' data-position='fixed' style='height:20px;background-color:transparent;'></div>
+            <div name="normalheader" data-role="header" data-theme="f">
+                <a href="#" id="backBtn" data-rel="back" class="ui-btn-left" data-theme="a">Back</a>
+                <h2 class="ia-heading">VA Facility Locator</h2>
+                <a href="index.html" id="homeBtn" data-ajax='false' class="ui-btn-right" data-theme="a">Home</a>
+            </div>
+            <div data-role="content" id="facility-details-content">
+                <ul data-autodividers="true" data-role="listview" data-inset="false" data-corners="false" id="facility-results"></ul>
+            </div>
+            <div data-role="footer" data-theme="e">
+                <div data-role="navbar">
+                    <ul>
+                        <li class="ia-navbar-separator"><a data-ajax='false' href="index.html#ia-wv" >Info &amp;<br />Services</a></li>
+                        <li class="ia-navbar-separator"><a href="#facility-search">Find a<br />Facility</a></li>
+                        <li><a data-ajax='false' href="index.html#ia-wv-crisis" >Crisis &amp;<br />Support</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <script src="js/map.js"></script>
+        <script src="js/search.js"></script>
+    </body>
+</html>

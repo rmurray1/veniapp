@@ -1,0 +1,7 @@
+﻿Information App will provide Veterans and Caregivers with comprehensive information about VA services through the use of mobile applications for multiple platforms. The VA Information App will provide Veterans and Caregivers the capability to receive information about VA and non-VA resources, locate VA services and easily track benefits deadlines in a mobile-friendly format that is quick and easy to use. The VA Information App will be available on public facing app stores and therefore accessible to all Veterans and Caregivers. The primary capabilities are:
+
+- Viewing maps to VA locations with embedded information about services; acting on the information by contacting the VA, deciding whether to travel, or obtaining driving directions
+- Obtaining benefits/eligibility timelines
+- Learning about VA resources and information
+- Learning about non-VA resources
+- Providing information specifically related to VHA Women’s Health.

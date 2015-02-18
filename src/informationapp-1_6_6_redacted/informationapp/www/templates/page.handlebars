@@ -1,0 +1,77 @@
+<section data-role="page" id="{{id}}" data-theme="f">	
+	<div data-role="header" style="background-color:white;{{{isIOS7}}}" data-position='fixed' data-tap-toggle='false' >
+		<div class='ui-bar' style='padding-top:9px;padding-bottom:12px;text-align:center;border:1px solid #0e4a83;background: #0e4a83;color: #ffffff;font-weight: bold;text-shadow: 0 1 0 #444444;background-image: -webkit-linear-gradient( #0f5190, #0c4275);'>
+		{{#unless home}}
+			<a href="#" name="backBtn" data-role="button" data-rel="back" class="ui-btn-left"  data-theme="a">Back</a>
+		{{/unless}}
+		<h2 ><div class="ia-heading">{{title}}</div></h2>
+		{{#unless home}}
+			<a href="index.html" data-role="button" name="homeBtn" class="ui-btn-right"  data-theme="a">Home</a>
+		{{/unless}}
+		</div>
+    </div>
+	{{#if this.pages}}
+	<div data-role="content">
+	
+		{{#if this.content}}
+			{{{this.content}}}
+		{{/if}}
+
+	    <ul data-role="listview" data-inset="true">
+        {{#each this.pages}}
+            <li>
+                {{#if action}}
+                    <a href="javascript:{{action}}" style="white-space:normal;">
+                {{else}}
+                    {{#if url}}
+                        <a href='{{url}}' style="white-space:normal;" data-ajax="false">
+                    {{else}}
+                        <a href='#{{id}}' style="white-space:normal;">
+                    {{/if}}
+                {{/if}}
+
+                    {{#if titlepic}}
+                        <img src="{{{getImageUrl titlepic}}}" alt="{{title}}" />
+                    {{/if}}
+
+                    <h3 class="ia-title">{{title}}</h3>
+
+                    {{#if subtitle}}
+                        <p class="ia-subtitle">{{subtitle}}</p>
+                    {{/if}}
+            	</a>
+            </li>
+        {{/each}}
+        </ul>
+	</div>
+	
+	{{else}}
+
+		{{#if this.content}}
+			<div data-role="content">
+				{{{this.content}}}
+			</div>
+		{{/if}}
+	
+	{{/if}}
+
+
+    <footer data-role="footer" id="ia-footer" data-position="fixed" data-theme="e" data-tap-toggle='false'>
+      <div data-role="navbar">
+        <ul>
+        	<li class="ia-navbar-separator"><a href="#ia-wv" {{{btnActiveStatus 'wv'}}}>Info &amp;<br />Services</a></li>
+        	<li class="ia-navbar-separator"><a href="#ia-search-page">Search by<br />Keyword</a></li>
+        	<li><a href="#ia-wv-crisis" {{{btnActiveStatus 'crisis'}}}>Crisis &amp;<br />Support</a></li>
+      	</ul>
+      </div>
+    </footer>
+</section>
+
+{{#each pages}}
+    {{! stops page sections from being created for 'action' and 'url' type pages }}
+	{{#unless this.action}}
+		{{#unless this.url}}
+			{{> page}}
+		{{/unless}}
+	{{/unless}}
+{{/each}}

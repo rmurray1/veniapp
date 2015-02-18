@@ -1,0 +1,33 @@
+<div class="facility" style='padding: 10px 13px 10px 13px;text-align:center;'>
+    <div style='margin-bottom:10px'>
+        <span style='font-size:.75em'>{{DIV_NAME}}</span><br />
+        <span style='font-size:1.2em'>{{FAC_NAME}}</span><br />
+        <span style='font-size:.8em'>{{TYPE_DESC}}</span>
+    </div>
+    <div>
+        {{ADDRESS}}<br />
+        {{CITY}},&nbsp;{{STATE}}&nbsp;&nbsp;{{ZIP}}<br />
+        {{{parsePhone PHONE_NUMBER}}}
+    </div>
+    <div style='margin-top:10px'>
+        <table style='width:100%'>
+            <tr>
+                <td style='width:33%;text-align:center;font-size:.8em;'>
+                    <img alt='Driving Directions' src='images/directionsIcon.png' onclick="{{{getDirections ADDRESS CITY STATE ZIP}}}" style="margin-bottom:-3px" />
+                    <br />DIRECTIONS
+                </td>
+                <td style='width:34%;text-align:center;font-size:.8em;{{{checkWebsite FAC_INTERNETURL}}}'>
+                    <img alt='Open Website' src='images/websiteIcon.png' onclick="browse('{{FAC_INTERNETURL}}')" style="margin-bottom:-3px" />
+                    <br />WEBSITE
+                </td>
+                <td style='width:33%;text-align:center;font-size:.8em;'>
+                    <img alt='Share by Email' src='images/shareIcon.png' onclick="{{{emailFacility FAC_NAME ADDRESS CITY STATE ZIP PHONE_NUMBER}}}" style="margin-bottom:-3px" />
+                    <br />SHARE
+                </td>
+            </tr>
+        </table>
+        <div style="margin-top:10px;font-size:.9em;display:none">
+            Information Incorrect?  {{{reportProblem FAC_NAME ADDRESS CITY STATE ZIP PHONE_NUMBER}}}
+        </div>
+    </div>
+</div>

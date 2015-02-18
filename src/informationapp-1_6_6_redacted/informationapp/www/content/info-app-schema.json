@@ -1,0 +1,92 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Info App Node",
+    "description": "Data node for a handlebars.js-rendered page in the VA Information App",
+    "type": "object",
+    "properties": {
+        "id": {
+            "description": "The unique identifier for a page",
+            "type": "string"
+        },
+        "title": {
+            "description": "The page's title",
+            "type":"string"
+        },
+        "titlepic": {
+            "description": "reference to an image to be used with a listview menu item.  Reference defined in info-app.json",
+            "type" : "string"
+        },
+        "subtitle": {
+            "description": "a second line of smaller text for a menu item.  brief description.",
+            "type": "string"
+        },
+        "category": {
+            "description": "a code used to maintain highlighting of the 'active' lower nav bar menu item",
+            "type":"string"
+        },
+        "action":{
+            "description" : "references a javascript function & arguments.",
+            "type":"string"
+        },
+        "url":{
+            "description": "for referencing a local resource (non-inappbrowser)",
+            "type":"string"
+        }
+        "questions": {
+            "description": "array of questions for question/answer content types",
+            "type":"object",
+            "properties": {
+                "expand": {
+                    "description":"flag indicating whether this question's collapsible panel should be expanded by default"
+                    "type":"boolean"
+                 },
+                 {
+                    "type": "array",
+                    "items": {
+                        "type":"object",
+                        "properties": {
+                            "question": {
+                                "description": "an individual question for collapsible question/answer content",
+                                "type":"string"
+                            },
+                            "answer": {
+                                "description": "array of answer items for the question",
+                                "type": "array",
+                                "items": {
+                                    "type":"object",
+                                    "properties": {
+                                        "line": {
+                                            "description": "an answer item.  bullet point/sentence"
+                                            "type": "string"
+                                        }
+                                        "sublines": {
+                                            "description": "array of child lines for a given answer line."
+                                            "type":"array",
+                                            "items": {
+                                                "type":"object",
+                                                "properties": {
+                                                    "line": {
+                                                        "description": "a child line for an answer line",
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+        },
+        "pages": {
+            "description": "child nodes/pages of the current node."
+            "type":"array",
+            "items": {
+                "$ref" : "info-app-schema.json"
+            }
+        }
+    }
+}

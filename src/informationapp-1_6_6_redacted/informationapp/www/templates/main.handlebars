@@ -1,0 +1,37 @@
+{{> page}}
+<section data-role="page" id="ia-search-page" data-title="Search Content for Keyword" data-url="ia-search-page" data-close-btn="none">
+<div data-role="header" style="background-color:white;{{{isIOS7}}}" data-position='fixed' data-tap-toggle='false' >
+  <div class='ui-bar' style='padding-top:9px;padding-bottom:12px;text-align:center;border:1px solid #0e4a83;background: #0e4a83;color: #ffffff;font-weight: bold;text-shadow: 0 1 0 #444444;background-image: -webkit-linear-gradient( #0f5190, #0c4275);'>
+    <a href="#" data-rel="back" data-theme="a" class="ui-btn-left">Back</a>
+    <h2><div class="ia-heading">Keyword Search</div></h2>
+    <a href="index.html" data-rel="back" data-theme="a" class="ui-btn-right">Home</a>
+  </div>
+</div> <!-- /header --> 
+<div id="matchCount" style="text-shadow:none;padding:3px;font-size:.8em;width:100%;text-align:right;float:right;color:black;" >0 matches</div>
+
+<div data-role="content">
+
+    <ul id="ia-content-search"
+        data-role="listview"
+        data-inset="false"
+        data-filter="true"
+        data-filter-placeholder="Enter search text"
+        data-filter-theme="a"
+        >
+    </ul>
+
+
+</div> <!-- /content -->  
+<div style="padding:8px 30px;font-weight:normal;font-size:.9em;text-align:center;">Enter a keyword in the text box above to find related topics.  At least 3 characters are needed to search...</div>        
+
+<footer data-role="footer" id="ia-footer" data-position="fixed" data-theme="e" data-tap-toggle='false'>
+      <div data-role="navbar">
+        <ul>
+            <li class="ia-navbar-separator"><a href="#ia-wv">Info &amp;<br />Services</a></li>
+            <li class="ia-navbar-separator"><a href="#ia">Home<br />Screen</a></li>
+            <li><a href="#ia-wv-crisis" >Crisis &amp;<br />Support</a></li>
+        </ul>
+      </div>
+</footer>
+
+</section> <!-- /dialog -->

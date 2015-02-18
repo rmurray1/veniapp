@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="gov.va.general.med.information" version="1.6.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Women Veterans Info</name>
+    <description>
+        Contains information about VA facilities, health benefits and information tailored for female veterans.
+    </description>
+    <author email="REDACTED__MobileDevelopers@domain" href="http://www.domain">
+        VA OIT PD ADC Mobile Developers
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="fullscreen" value="true" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="orientation" value="default" />
+    <preference name="splashscreen" value="splash" />
+    <preference name="splashscreendelay" value="3000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+</widget>

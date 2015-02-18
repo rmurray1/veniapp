@@ -1,0 +1,28 @@
+#!/bin/sh
+
+#clears out old Cordova plugins and platforms and builds everything fresh
+#be sure to define CORDOVA320_BIN_DIR to the directory that contains the "cordova" executable
+
+#clear out old junk
+rm -rf platforms
+rm -rf plugins
+
+#prepare for adding Cordova plugins
+mkdir platforms
+
+#add all Cordova plugins we need
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/com.phonegap.plugins.videoplayer
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/com.wunwun.plugins.sms-composer
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/de.appplant.cordova.plugin.email-composer
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/org.apache.cordova.device
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/org.apache.cordova.geolocation
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/org.apache.cordova.inappbrowser
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/org.apache.cordova.splashscreen
+$CORDOVA331_BIN_DIR/cordova plugin add cordovaPluginRepo/com.phonegap.plugin.mobile-accessibility
+
+#add mobile platforms we want to support
+$CORDOVA331_BIN_DIR/cordova platform add android
+$CORDOVA331_BIN_DIR/cordova platform add ios
+
+#do the actual Cordova build now
+$CORDOVA331_BIN_DIR/cordova build
