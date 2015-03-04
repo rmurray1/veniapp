@@ -1,0 +1,51 @@
+#:kivy 1.8.0
+#:import KivyLexer kivy.extras.highlight.KivyLexer
+#:import Factory kivy.factory.Factory
+
+<RegisterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            text: 'register'
+        Button:
+            text: 'Back to Welcome'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'welcome'
+
+<WelcomeScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: 'Welcome'
+            font_size: '20sp'
+
+        Label:
+            text: 'Veni'
+            font_size: '16sp'
+
+        Button:
+            text: 'Login'
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'login'
+        Button:
+            text: 'Register'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'register'
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button:
+            text: 'Login'
+        Button:
+            text: 'Back to Welcome'
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'welcome'
+

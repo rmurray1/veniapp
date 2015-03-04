@@ -1,0 +1,30 @@
+{
+	"build_systems":
+	[
+		{
+			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+			"name": "Anaconda Python Builder",
+			"selector": "source.python",
+			"shell_cmd": "python -u \"$file\""
+		}
+	],
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/Users/rmurray1/Google Drive/UTD-MSSE-Spring-2015/SE6387-DrRym-AdvanceSEPrj/veniapp_src/kivyVersion"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/rmurray1/Documents/Raleigh/software/kivy/examples/demo/showcase"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "."
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/Users/rmurray1/Documents/Raleigh/software/kivy/examples/android/takepicture"
+		}
+	]
+}
