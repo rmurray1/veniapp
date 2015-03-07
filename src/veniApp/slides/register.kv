@@ -1,0 +1,57 @@
+<RegisterScreen>:
+    button_font_size: '20sp'
+    padding: root.width * .02, root.height * .02
+
+    FloatLayout:
+        Label:
+            text: 'Veni Registeration'
+            font_size:'20sp'
+            size_hint: 1, None
+            space: 5
+            padding: root.padding
+            pos_hint: {'center_x':.5, 'center_y':.9}
+            valign: 'top'
+            height: self.texture_size[1] + (2 * root.padding[1])
+
+        TextInput:
+            id: v_register
+            size_hint: .6, .1
+            font_size: root.button_font_size
+            multiline: False
+            pos_hint: {'center_x':.5, 'center_y':.7}
+            hint_text: "First Name"
+        TextInput:
+            size_hint: .6, .1
+            font_size: root.button_font_size
+            multiline: False
+            pos_hint: {'center_x':.5, 'center_y':.6}
+            hint_text: "Last Name"
+        TextInput:
+            size_hint: .6, .1
+            font_size: root.button_font_size
+            multiline: False
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            hint_text: "Date of Birth"
+        TextInput:
+            size_hint: .6, .1
+            font_size: root.button_font_size
+            multiline: False
+            pos_hint: {'center_x':.5, 'center_y':.4}
+            hint_text: "Email Addres"
+        TextInput:
+            size_hint: .6, .1
+            font_size: root.button_font_size
+            multiline: False
+            pos_hint: {'center_x':.5, 'center_y':.5}
+            hint_text: "Password"
+        TextInput:
+            size_hint: .6, .1
+            pos_hint:{'center_x':.5, 'center_y':.4}
+            font_size: root.button_font_size
+            color: 1,0,0,1
+            hint_text: "Confirm Password"
+        Button:
+            pos_hint:{'center_x':.5, 'center_y':.2}
+            font_size: root.button_font_size
+            size_hint: .3, .1
+            text: "Register"

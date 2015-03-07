@@ -1,0 +1,23 @@
+<WelcomeScreen>:
+    padding: root.width * .02, root.height * .02
+    button_font_size: '20sp'
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1, 1
+
+        Label:
+            text: 'Welcome'
+            font_size:'25sp'
+            padding: root.width * .02, root.height * .02
+
+            valign: 'top'
+            halign: 'center'
+            height: self.texture_size[1] + (2 * root.padding[1])
+        Label:
+            text: 'Veni'
+            font_size: '20sp'
+            padding: root.padding
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+            height: self.texture_size[1] + (2 * root.padding[1])

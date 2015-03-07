@@ -1,0 +1,62 @@
+<LoginScreen>:
+    padding: root.width * .02, root.height * .02
+    button_font_size: '20sp'
+    label_font_size: '20sp'
+
+    BoxLayout:
+        orientation: 'vertical'
+        size_hint: 1, 1
+
+        Label:
+            text: 'Login'
+            font_size:'20sp'
+            size_hint: 1, None
+            space: 5
+            padding: root.padding
+            valign: 'top'
+            height: self.texture_size[1] + (2 * root.padding[1])
+
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, 1
+
+            GridLayout:
+                cols: 2
+                row: 2
+                row_default_height: "40dp"
+                row_force_default: True
+                spacing: 5
+                padding: root.padding
+                Label:
+                    text: 'Email Address'
+                    font_size: root.label_font_size
+                    halign: 'left'
+                    size_hint: .3, None
+                    text_size: self.size
+                    #
+
+                TextInput:
+                    id: ti_email
+                    font_size: root.label_font_size
+                    hint_text: 'email address'
+                    text_size: self.size
+                    size_hint: .6, None
+                    multiline:False
+                    # focus: True
+
+
+                Label:
+                    text: 'Password'
+                    font_size: root.label_font_size
+                    size_hint: .3, None
+                    text_size: self.size
+                    halign: 'left'
+                    #width: 120
+
+                TextInput:
+                    id: ti_passwd
+                    font_size: root.label_font_size
+                    hint_text: 'Password'
+                    size_hint: .6, None
+                    multiline:False
+                    password: True
