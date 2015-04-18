@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <!--
+  * Copyright © 2012-2015, Intel Corporation. All rights reserved.
+  * Please see the included README.md file for license terms and conditions.
+  -->
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+        <meta charset="UTF-8">
+        <title>Blank App Designer Cordova Web App Project Template</title>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+        <!--
+  * The "meta viewport" tag (below) helps your app size appropriately to a device's ideal viewport.
+  * Note that Windows device viewports work better when initialized using the @viewport CSS rule.
+  * For a quick overview of "meta viewport" and @viewport, see this article:
+  *   http://webdesign.tutsplus.com/tutorials/htmlcss-tutorials/quick-tip-dont-forget-the-viewport-meta-tag
+  * To see how it works, try your app on a real device with and without a "meta viewport" tag.
+  * Additional useful references include:
+  *   http://www.quirksmode.org/mobile/viewports.html
+  *   http://www.quirksmode.org/mobile/metaviewport/devices.html
+  *   https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html
+-->
+
+        <!-- <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1"> -->
+        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=no">
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, minimum-scale=1, maximum-scale=2"> -->
+
+        <style>
+            /* following three (cascaded) are equivalent to above three meta viewport statements */
+            /* see http://www.quirksmode.org/blog/archives/2014/05/html5_dev_conf.html */
+            /* see http://dev.w3.org/csswg/css-device-adapt/ */
+                @-ms-viewport { width: 100vw ; min-zoom: 100% ; zoom: 100% ; }          @viewport { width: 100vw ; min-zoom: 100% zoom: 100% ; }
+                @-ms-viewport { user-zoom: fixed ; min-zoom: 100% ; }                   @viewport { user-zoom: fixed ; min-zoom: 100% ; }
+                /*@-ms-viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }   @viewport { user-zoom: zoom ; min-zoom: 100% ; max-zoom: 200% ; }*/
+        </style>
+
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" type="text/css" href="css/index_main.less.css" class="main-less">
+
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work below -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+
+        <!-- Recommended location for your JavaScript libraries -->
+        <!-- These library references (below) are just examples to give you the general idea... -->
+        <!-- <script src="lib/mc/hammer.js"></script> -->
+        <!-- <script src="lib/ft/fastclick.js"></script> -->
+
+        <!--
+  * cordova.js is a phantom lib for "Cordova HTML5 web app," it does nothing in a "Standard HTML5 web app"
+  * Seeing a "Failed to load resource: net::ERR_FILE_NOT_FOUND" message caused by this "cordova.js" script?
+  * The cordova.js script is required if you convert your "Standard HTML5" project into a "Cordova" project.
+  * You can safely ignore the error or comment out this line if you will not be developing a Cordova app.
+-->
+        <script src="cordova.js" id="xdkJScordova_"></script>
+
+        <script src="js/app.js"></script>
+        <!-- for your event code, see README and file comments for details -->
+        <script src="js/init-app.js"></script>
+        <!-- for your init code, see README and file comments for details -->
+        <script src="xdk/init-dev.js"></script>
+        <!-- normalizes device and document ready events, see file for details -->
+        <script type="application/javascript" src="lib/jquery.min.js"></script>
+        <script type="application/javascript" src="marginal/marginal-position.min.js"></script>
+        <script type="application/javascript" src="js/index_user_scripts.js"></script>
+        <script type="application/javascript" src="xdk/ad/bs_subpage.js"></script>
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <script type="application/javascript" src="google_maps/google_maps.js"></script>
+    </head>
+
+    <body>
+        <!-- IMPORTANT: Do not include a weinre script tag as part of your release builds! -->
+        <!-- Place your remote debugging (weinre) script URL from the Test tab here, if it does not work above -->
+        <!-- <script src="http://debug-software.intel.com/target/target-script-min.js#insertabiglongfunkynumberfromthexdkstesttab"></script> -->
+        <div class="upage my_bkg" id="mainpage">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_1" data-uib="layout/header" data-ver="0">
+                    <h2>Welcome to Veni</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_49_29">
+                    <div class="btn-group uib-bs-flex widget uib_w_2 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                        <button class="btn widget uib_w_3 btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="login">Login</button>
+                        <button class="btn widget uib_w_5 btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="register">Register</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="login_page">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_6" data-uib="layout/header" data-ver="0">
+                    <h2>VENI Login</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_50_96">
+                    <div class="table-thing widget uib_w_7 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="email">Email</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Enter email" id="email">
+                    </div>
+                    <div class="table-thing widget uib_w_8 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="password">Password</label>
+                        <input class="wide-control form-control default" type="password" placeholder="Enter password" id="password">
+                    </div>
+                    <div class="btn-group uib-bs-flex widget uib_w_9 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                        <button class="btn widget uib_w_10 btn-info login_btn_mrg" data-uib="twitter%20bootstrap/button" data-ver="1" id="blgback"><i class="glyphicon glyphicon-arrow-left" data-position="icon only"></i>
+                        </button>
+                        <button class="btn widget uib_w_12 btn-info login_btn_mrg" data-uib="twitter%20bootstrap/button" data-ver="1" id="blgnext"><i class="glyphicon glyphicon-arrow-right" data-position="icon only"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="register_page">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_13" data-uib="layout/header" data-ver="0">
+                    <h2>VENI First Run</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_51_18">
+                    <div class="table-thing widget uib_w_14 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="fname">First Name</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Enter First Name" id="fname">
+                    </div>
+                    <div class="table-thing widget uib_w_15 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="lname">Last Name</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Enter Last Name" id="lname">
+                    </div>
+                    <div class="table-thing widget uib_w_16 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="vetid">VetId</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Enter VetID" id="vetid">
+                    </div>
+                    <div class="table-thing widget uib_w_17 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="emailid">Email</label>
+                        <input class="wide-control form-control default" type="text" placeholder="Enter Email" id="emailid">
+                    </div>
+                    <div class="table-thing widget uib_w_18 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="pswd">Pswd</label>
+                        <input class="wide-control form-control default" type="password" placeholder="Enter Password" id="pswd">
+                    </div>
+                    <div class="table-thing widget uib_w_19 lbl_txt" data-uib="twitter%20bootstrap/input" data-ver="1">
+                        <label class="narrow-control label-inline" for="cfmpswd">Confirm Password</label>
+                        <input class="wide-control form-control default" type="password" placeholder="Confirm Password" id="cfmpswd">
+                    </div>
+
+                    <div class="btn-group uib-bs-flex widget uib_w_21 d-margins" data-uib="twitter%20bootstrap/button_group" data-ver="1">
+                        <button class="btn widget uib_w_22 btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="vfrback"><i class="glyphicon glyphicon-arrow-left" data-position="icon only"></i>
+                        </button>
+                        <button class="btn widget uib_w_24 btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="vfrnext"><i class="glyphicon glyphicon-arrow-right" data-position="icon only"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="menu_page">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_25" data-uib="layout/header" data-ver="0">
+                    <h2>VENI Menu</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_43_43">
+                    <button class="btn widget uib_w_26 d-margins btn-info menu_txt menu_margin" data-uib="twitter%20bootstrap/button" data-ver="1">Fetch Appointments</button>
+                    <button class="btn widget uib_w_27 d-margins btn-info menu_txt" data-uib="twitter%20bootstrap/button" data-ver="1">Show Appointments</button>
+                    <button class="btn widget uib_w_28 d-margins btn-info menu_txt" data-uib="twitter%20bootstrap/button" data-ver="1">Check-in at Facility</button>
+                    <button class="btn widget uib_w_29 d-margins btn-info menu_txt" data-uib="twitter%20bootstrap/button" data-ver="1">Direction to Facility</button>
+                    <button class="btn widget uib_w_30 d-margins btn-info menu_txt" data-uib="twitter%20bootstrap/button" data-ver="1">VENI Exit</button>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="fetch_appt_page">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_31" data-uib="layout/header" data-ver="0">
+                    <h2>Fetch Appointment</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_48_76">
+                    <div class="progress full-width-widget widget uib_w_32 d-margins menu_margin active progress-striped" data-uib="twitter%20bootstrap/progress_bar" data-ver="1">
+                        <div class="progress-bar progress-bar-warning progress-bar-success progress-bar-info" style="width: 60%;"></div>
+                    </div>
+                    <button class="btn widget uib_w_33 menu_txt fetch_btn_margin btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="fetch_btn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="show_appt">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_34" data-uib="layout/header" data-ver="0">
+                    <h2>Show Appointments</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_49_34">
+                    <button class="btn widget uib_w_35 menu_txt show_btn_margin btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="show_menu_btn">Main Menu</button>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="checkin_page">
+            <div class="upage-outer">
+                <div class="uib-header header-bg container-group inner-element uib_w_36" data-uib="layout/header" data-ver="0">
+                    <h2>Check-in at facility</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col" id="page_50_14">
+                    <button class="btn widget uib_w_37 d-margins show_btn_margin btn-info menu_txt" data-uib="twitter%20bootstrap/button" data-ver="1" id="checkin_main_menu">Main Menu</button>
+                </div>
+            </div>
+        </div>
+        <div class="upage hidden my_bkg" id="direction_page">
+            <div class="upage-outer">
+                <div class="uib-header container-group inner-element uib_w_38 header-bg" data-uib="layout/header" data-ver="0">
+                    <h2>Direction to facility</h2>
+                    <div class="widget-container wrapping-col single-centered"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col left"></div>
+                    <div class="widget-container content-area horiz-area wrapping-col right"></div>
+                </div>
+                <div class="upage-content content-area vertical-col left" id="page_51_10">
+                    <div class="widget uib_w_39 maps-size d-margins" data-uib="media/google_maps" data-ver="0" data-rpath="null" data-zoom="8"></div>
+                    <button class="btn widget uib_w_40 d-margins menu_margin menu_txt btn-info" data-uib="twitter%20bootstrap/button" data-ver="1" id="dir_main_menu">Main Menu</button>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
