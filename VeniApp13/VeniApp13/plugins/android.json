@@ -8,7 +8,24 @@
     },
     "installed_plugins": {
         "org.apache.cordova.device": {},
-        "org.apache.cordova.splashscreen": {}
+        "org.apache.cordova.splashscreen": {},
+        "org.apache.cordova.device-motion": {},
+        "org.apache.cordova.camera": {},
+        "org.apache.cordova.media-capture": {},
+        "org.apache.cordova.device-orientation": {},
+        "org.apache.cordova.network-information": {},
+        "org.apache.cordova.contacts": {},
+        "org.apache.cordova.battery-status": {},
+        "org.apache.cordova.file-transfer": {},
+        "org.apache.cordova.geolocation": {},
+        "org.apache.cordova.globalization": {},
+        "org.apache.cordova.inappbrowser": {},
+        "org.apache.cordova.media": {},
+        "org.apache.cordova.dialogs": {},
+        "org.apache.cordova.vibration": {},
+        "org.apache.cordova.statusbar": {}
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "org.apache.cordova.file": {}
+    }
 }
